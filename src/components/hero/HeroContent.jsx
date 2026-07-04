@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 function HeroContent() {
   return (
-    <div className="relative z-20 flex h-screen items-center justify-center">
+    <div className="relative z-20 flex min-h-screen items-center justify-center pt-24">
       <motion.div
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
@@ -13,10 +13,9 @@ function HeroContent() {
           Welcome To
         </p>
 
-        <h1 className="bg-gradient-to-r from-cyan-300 via-white to-purple-400 bg-clip-text text-8xl font-black text-transparent md:text-[10rem]">
+         <h1 className="bg-gradient-to-r from-cyan-300 via-white to-purple-400 bg-clip-text text-7xl md:text-[9rem] lg:text-[10rem] font-black text-transparent drop-shadow-[0_0_35px_rgba(168,85,247,0.9)]">
           IGNITO
         </h1>
-
         <h2 className="mt-2 text-5xl font-bold tracking-[8px] text-purple-300">
           2026
         </h2>

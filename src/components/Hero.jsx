@@ -3,7 +3,10 @@ import HeroContent from "./hero/HeroContent";
 
 function Hero() {
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section
+      id="home"
+      className="relative h-screen overflow-hidden"
+    >
       <Background />
       <HeroContent />
     </section>
