@@ -1,110 +1,91 @@
-import { useEffect, useRef } from "react";
-
-/**
- * Global space effects:
- * - twinkling stars
- * - shooting stars
- * - subtle motion glow
- */
+import { motion } from "framer-motion";
 
 function SpaceEffects() {
-  const canvasRef = useRef(null);
+  // Twinkling stars
+  const stars = Array.from({ length: 180 }, (_, i) => ({
+    id: i,
+    size: Math.random() * 3 + 1,
+    top: Math.random() * 100,
+    left: Math.random() * 100,
+    delay: Math.random() * 5,
+    duration: Math.random() * 3 + 2,
+  }));
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-
-    canvas.width = width;
-    canvas.height = height;
-
-    // STARS
-    const stars = Array.from({ length: 150 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      r: Math.random() * 1.5,
-      opacity: Math.random(),
-      speed: Math.random() * 0.5,
-    }));
-
-    // SHOOTING STARS
-    const shootingStars = [];
-
-    function createShootingStar() {
-      shootingStars.push({
-        x: Math.random() * width,
-        y: Math.random() * height * 0.5,
-        len: Math.random() * 80 + 50,
-        speed: Math.random() * 8 + 6,
-        opacity: 1,
-      });
-    }
-
-    setInterval(createShootingStar, 2000);
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-
-      // BACKGROUND STARS
-      stars.forEach((s) => {
-        s.opacity += (Math.random() - 0.5) * 0.05;
-
-        if (s.opacity < 0) s.opacity = 0;
-        if (s.opacity > 1) s.opacity = 1;
-
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${s.opacity})`;
-        ctx.fill();
-      });
-
-      // SHOOTING STARS
-      for (let i = 0; i < shootingStars.length; i++) {
-        const s = shootingStars[i];
-
-        ctx.beginPath();
-        ctx.moveTo(s.x, s.y);
-        ctx.lineTo(s.x - s.len, s.y + s.len * 0.3);
-
-        ctx.strokeStyle = `rgba(180, 120, 255, ${s.opacity})`;
-        ctx.lineWidth = 2;
-        ctx.stroke();
-
-        s.x += s.speed;
-        s.y += s.speed;
-
-        s.opacity -= 0.01;
-
-        if (s.opacity <= 0) {
-          shootingStars.splice(i, 1);
-          i--;
-        }
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // Shooting stars
+  const shootingStars = Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    top: Math.random() * 40,
+    left: Math.random() * 100,
+    delay: i * 3,
+    duration: 1.8,
+  }));
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"
-    />
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-10">
+
+      {/* Twinkling Stars */}
+      {stars.map((star) => (
+        <motion.span
+          key={star.id}
+          className="absolute rounded-full bg-white"
+          style={{
+            width: star.size,
+            height: star.size,
+            top: `${star.top}%`,
+            left: `${star.left}%`,
+          }}
+          animate={{
+            opacity: [0.2, 1, 0.2],
+            scale: [1, 1.8, 1],
+          }}
+          transition={{
+            duration: star.duration,
+            delay: star.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+
+      {/* Shooting Stars */}
+      {shootingStars.map((shoot) => (
+        <motion.div
+          key={shoot.id}
+          className="absolute h-[2px] w-36 rounded-full bg-gradient-to-r from-white via-cyan-300 to-transparent"
+          style={{
+            top: `${shoot.top}%`,
+            left: `${shoot.left}%`,
+            rotate: "25deg",
+          }}
+          animate={{
+            x: [-600, 600],
+            y: [-200, 200],
+            opacity: [0, 1, 1, 0],
+          }}
+          transition={{
+            duration: shoot.duration,
+            delay: shoot.delay,
+            repeat: Infinity,
+            repeatDelay: 6,
+            ease: "linear",
+          }}
+        />
+      ))}
+
+      {/* Purple Glow */}
+      <motion.div
+        className="absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-600/10 blur-[180px]"
+        animate={{
+          scale: [1, 1.08, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+        }}
+      />
+
+    </div>
   );
 }
 

@@ -7,9 +7,9 @@ function About() {
       className="relative overflow-hidden py-32 px-8"
     >
       {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#09031d] via-[#12062d] to-slate-950"></div>
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#09031d] via-[#12062d] to-slate-950"></div>
 
-      <div className="absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-700/10 blur-[180px]"></div>
+      <div className="absolute -z-10 left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-700/10 blur-[180px]"></div>
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
 

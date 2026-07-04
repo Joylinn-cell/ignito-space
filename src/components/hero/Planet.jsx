@@ -8,8 +8,8 @@ function Planet() {
       alt="Planet"
       className="absolute -left-72 top-16 w-[900px] opacity-90 select-none pointer-events-none"
       animate={{
-        y: [-20, -20, -20],
-        rotate: [0, 3, 0],
+        y: [-30, -30, -30],
+        rotate: [0, 10, 0],
       }}
       transition={{
         duration: 20,
