@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Loader from "./components/Loader";
+import Cursor from "./components/Cursor";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -25,7 +26,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden relative">
-
+      <Cursor />
       {/* BACKGROUND */}
       <SpaceEffects />
 
