@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import BackgroundMusic from "./components/BackgroundMusic";
 import Loader from "./components/Loader";
 import Cursor from "./components/Cursor";
 import Navbar from "./components/Navbar";
@@ -26,6 +26,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden relative">
+      <BackgroundMusic />
       <Cursor />
       {/* BACKGROUND */}
       <SpaceEffects />
