@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+
+import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -10,22 +13,47 @@ import FAQ from "./components/FAQ";
 import SpaceEffects from "./components/SpaceEffects";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden relative">
+
+      {/* BACKGROUND */}
       <SpaceEffects />
 
-      <Navbar />
+      {/* LOADER OVERLAY */}
+      {loading && (
+        <div className="fixed inset-0 z-[100]">
+          <Loader />
+        </div>
+      )}
 
-      <main>
-        <Hero />
-        <About />
-        <Events />
-        <Competitions />
-        <FAQ />
-        <Register />
-        <Contact />
-        <Footer />
-      </main>
+      {/* MAIN CONTENT */}
+      {!loading && (
+        <>
+          <Navbar />
+
+          <main>
+            <Hero />
+            <About />
+            <Events />
+            <Competitions />
+            <FAQ />
+            <Register />
+            <Contact />
+            <Footer />
+          </main>
+        </>
+      )}
+
     </div>
   );
 }
