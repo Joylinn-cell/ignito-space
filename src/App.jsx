@@ -5,6 +5,8 @@ import Events from "./components/Events";
 import Competitions from "./components/Competitions";
 import Register from "./components/Register";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import FAQ from "./components/FAQ";
 import SpaceEffects from "./components/SpaceEffects";
 
 function App() {
@@ -19,8 +21,10 @@ function App() {
         <About />
         <Events />
         <Competitions />
+        <FAQ />
         <Register />
         <Contact />
+        <Footer />
       </main>
     </div>
   );

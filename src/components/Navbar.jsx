@@ -27,6 +27,13 @@ function Navbar() {
             Competitions
           </a>
 
+           <a
+            href="#faq"
+            className="transition duration-300 hover:text-cyan-400"
+          >
+            FAQ
+          </a>
+
           <a href="#contact" className="hover:text-cyan-400 transition">
             Contact
           </a>
